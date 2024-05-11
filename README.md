@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To setup the Rails application, ensure that Rails.new is installed. You can do so by visiting https://rails.new
 
-Things you may want to cover:
+Get Ollama here: https://ollama.com
 
-* Ruby version
+With the above installed, you're ready to take the app for spin locally.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
