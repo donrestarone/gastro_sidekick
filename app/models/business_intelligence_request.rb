@@ -1,0 +1,2 @@
+class BusinessIntelligenceRequest < ApplicationRecord
+end
