@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_11_150254) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_154329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_11_150254) do
     t.bigint "price_cents"
     t.boolean "spoiled"
     t.datetime "expiry_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meal_suggestions", force: :cascade do |t|
+    t.string "status"
+    t.jsonb "request_metadata"
+    t.jsonb "response_metadata"
+    t.text "request_body"
+    t.text "response_body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :meal_suggestions
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :ingredients, path: '/'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
