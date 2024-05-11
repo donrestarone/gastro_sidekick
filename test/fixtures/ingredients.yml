@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  quantity: 1
+  price_cents: 
+  spoiled: false
+  expiry_date: 2024-05-11 11:02:54
+
+two:
+  name: MyString
+  quantity: 1
+  price_cents: 
+  spoiled: false
+  expiry_date: 2024-05-11 11:02:54
