@@ -1,5 +1,7 @@
 class MealSuggestion < ApplicationRecord
-  after_create_commit :generate_embedding, :process_via_llm 
+  after_create_commit :generate_embedding
+
+  has_neighbors :embedding
 
   # point to your Ollama server
   ENDPOINT = "http://localhost:11434"
@@ -25,7 +27,7 @@ class MealSuggestion < ApplicationRecord
       ).body
       response_body = JSON.parse(response)
     rescue => e
-      self.update(status: "failed - #{e.message}")
+      self.update(status: "failed generating chat completion - #{e.message}")
     end
     model_response = response_body["message"]["content"]
     self.update(
@@ -50,10 +52,11 @@ class MealSuggestion < ApplicationRecord
       ).body
       response_body = JSON.parse(response)
       embedding = response_body["embedding"]
-      debugger
+      self.update(embedding: embedding)
+      self.process_via_llm
     rescue => e
-      debugger
-      self.update(status: "failed - #{e.message}")
+      self.update(status: "failed generating embeddings - #{e.message}")
+      throw(:abort)
     end
   end
 end

@@ -73,3 +73,5 @@ gem "rails_admin", "~> 3.0.beta2"
 gem "sassc-rails"
 
 gem "httparty", "~> 0.22.0"
+
+gem "neighbor", "~> 0.3.2"
