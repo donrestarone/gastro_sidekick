@@ -1,5 +1,5 @@
 class MealSuggestion < ApplicationRecord
-  after_create_commit :process_via_llm
+  after_create_commit :generate_embedding, :process_via_llm 
 
   # point to your Ollama server
   ENDPOINT = "http://localhost:11434"
@@ -34,5 +34,26 @@ class MealSuggestion < ApplicationRecord
       response_metadata: response_body,
       status: 'completed',
     )
+  end
+
+  def generate_embedding
+    begin
+      response = HTTParty.post(
+        "#{ENDPOINT}/api/embeddings", 
+        body: {
+          model: "nomic-embed-text", 
+          prompt: self.request_body,
+          stream: false,
+        }.to_json,
+        debug_output: $stdout,
+        timeout: 300,
+      ).body
+      response_body = JSON.parse(response)
+      embedding = response_body["embedding"]
+      debugger
+    rescue => e
+      debugger
+      self.update(status: "failed - #{e.message}")
+    end
   end
 end
