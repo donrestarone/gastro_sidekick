@@ -6,11 +6,15 @@
 
 <img width="1726" alt="Screen Shot 2024-05-11 at 12 52 00 PM" src="https://github.com/donrestarone/gastro_sidekick/assets/35935196/6b038eb7-3d72-4453-9dd1-06c5aa3d1540">
 
-
+## Install
 To setup the Rails application, ensure that Rails.new is installed. You can do so by visiting https://rails.new
 
 Get Ollama here: https://ollama.com
 
+Install PgVector: https://github.com/pgvector/pgvector 
+``` bash
+brew install pgvector
+```
 Precompile assets
 
 ``` bash
