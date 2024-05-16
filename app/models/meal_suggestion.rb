@@ -6,6 +6,22 @@ class MealSuggestion < ApplicationRecord
   # point to your Ollama server
   ENDPOINT = "http://localhost:11434"
 
+  def self.find_by_vector(natural_language_query)
+    response = HTTParty.post(
+      "#{ENDPOINT}/api/embeddings", 
+      body: {
+        model: "nomic-embed-text", 
+        prompt: natural_language_query,
+        stream: false,
+      }.to_json,
+      debug_output: $stdout,
+      timeout: 300,
+    ).body
+    response_body = JSON.parse(response)
+    embedding = response_body["embedding"]
+    meal_suggestions = MealSuggestion.nearest_neighbors(:embedding, embedding, distance: "cosine").first(5)
+  end
+
   private
 
   def process_via_llm
