@@ -9,7 +9,9 @@ class BusinessIntelligenceRequest < ApplicationRecord
     self.update(status: 'processing')
     messages = []
     ingredients = Ingredient.all.map{|ingredient| ingredient.name}
-    messages << {role: 'system', content: "you are a business intelligence and marketing wizard at a SaaS company that helps users manage their kitchen supplies and meal creation. Here's what our users are buying: #{ingredients.join(', ')}"}
+    meal_suggestions = MealSuggestion.find_by_vector(self.request_body)
+    meal_suggestion_embeddings = meal_suggestions.map{|meal_suggestion| meal_suggestion.embedding}
+    messages << {role: 'system', content: "you are a business intelligence and marketing wizard at a SaaS company that helps users manage their kitchen supplies and meal creation. Here's what our users are buying: #{ingredients.join(', ')}. Here's what our users are saying: #{meal_suggestion_embeddings}"}
     messages << {role: 'user', content: self.request_body}
     begin
       response = HTTParty.post(
