@@ -6,6 +6,17 @@ class MealSuggestion < ApplicationRecord
   # point to your Ollama server
   ENDPOINT = "http://localhost:11434"
 
+  def get_similar_meal_suggestions
+    results = self.nearest_neighbors(:embedding, distance: "cosine").first(5).map{|meal_suggestion| {id: meal_suggestion.id, request_body: meal_suggestion.request_body, distance: meal_suggestion.neighbor_distance}}
+    return {
+      target: {
+        id: self.id,
+        request_body: self.request_body
+      },
+      results: results
+    }
+  end
+
   def self.find_by_vector(natural_language_query)
     response = HTTParty.post(
       "#{ENDPOINT}/api/embeddings", 

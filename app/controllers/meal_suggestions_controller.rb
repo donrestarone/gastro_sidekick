@@ -8,6 +8,7 @@ class MealSuggestionsController < ApplicationController
 
   # GET /meal_suggestions/1 or /meal_suggestions/1.json
   def show
+    @similar_meal_suggestions = @meal_suggestion.get_similar_meal_suggestions[:results]
   end
 
   # GET /meal_suggestions/new
