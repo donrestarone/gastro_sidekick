@@ -154,6 +154,8 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     mutex_m (0.2.0)
+    neighbor (0.3.2)
+      activerecord (>= 6.1)
     nested_form (0.3.2)
     net-imap (0.4.11)
       date
@@ -315,6 +317,7 @@ DEPENDENCIES
   httparty (~> 0.22.0)
   importmap-rails
   jbuilder
+  neighbor (~> 0.3.2)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.3)

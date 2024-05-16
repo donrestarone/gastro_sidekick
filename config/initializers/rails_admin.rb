@@ -24,6 +24,21 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  # register vector as rails admin data type: https://github.com/railsadminteam/rails_admin/issues/2049#issuecomment-53109358
+  class RailsAdmin::Config::Fields::Types::Vector < RailsAdmin::Config::Fields::Base
+    RailsAdmin::Config::Fields::Types::register(self)
+  end
+
+  config.model 'MealSuggestion' do
+    list do
+      field :id
+      field :status
+      field :request_body
+      field :response_body
+    end
+  end
+
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory

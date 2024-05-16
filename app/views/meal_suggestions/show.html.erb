@@ -5,6 +5,14 @@
     <% end %>
 
     <%= render @meal_suggestion %>
+      <% if @similar_meal_suggestions.size > 0 %>
+        <div>
+          <strong>similar meal suggestions</strong>
+          <% @similar_meal_suggestions.each do |result| %>
+            <%= link_to result[:request_body], edit_meal_suggestion_path(MealSuggestion.find(result[:id])), class: "mt-2 rounded py-3 px-5 bg-gray-100 inline-block font-thin" %>  
+          <% end %>
+        </div>
+      <% end %>
 
     <%= link_to "Edit this meal suggestion", edit_meal_suggestion_path(@meal_suggestion), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Back to meal suggestions", meal_suggestions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
